@@ -1,5 +1,6 @@
 import { Outlet, Navigate, useLocation } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
+import useThemeStore from "../store/useThemeStore";
 import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import { Loader } from "lucide-react";
@@ -7,6 +8,7 @@ import { Header } from "../components";
 
 export default function Layout() {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
+  const { theme } = useThemeStore();
   const location = useLocation();
 
   useEffect(() => {
@@ -33,10 +35,10 @@ export default function Layout() {
   }
 
   return (
-    <>
+    <main data-theme={theme}>
       <Header />
       <Outlet />
       <Toaster />
-    </>
+    </main>
   );
 }
